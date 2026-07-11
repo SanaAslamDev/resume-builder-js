@@ -237,3 +237,35 @@ main{
 .add-more-btn:hover {
   background: #EFF6FF;
 }
+
+/* ===================================
+   SKILL TAGS
+   =================================== */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #EFF6FF;
+  color: #2563EB;
+  padding: 6px 10px;
+  border-radius: 16px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.tag button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #2563EB;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0;
+}
