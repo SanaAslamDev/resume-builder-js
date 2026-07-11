@@ -105,3 +105,135 @@ main{
     font-size: 13px;
   }
 }
+
+.form-section {
+  background: #FFFFFF;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  overflow: hidden;
+}
+
+.form-section-header {
+  padding: 16px;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+.form-section-header h2 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.form-section-body {
+  padding: 16px;
+}
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group:last-child {
+  margin-bottom: 0;
+}
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #2563EB;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+
+/* ===================================
+   COLLAPSIBLE SECTIONS
+   =================================== */
+.form-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.toggle-icon {
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.form-section.collapsed .form-section-body {
+  display: none;
+}
+
+.form-section.collapsed .toggle-icon {
+  transform: rotate(-90deg);
+}
+
+.entry-card {
+  background: #F9FAFB;
+  border: 1px solid #E5E7EB;
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.entry-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+.entry-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #6B7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px;
+  border-radius: 4px;
+  line-height: 1;
+}
+.delete-btn:hover {
+  background: #FEE2E2;
+}
+/* ===================================
+   ADD MORE BUTTON
+   =================================== */
+.add-more-btn {
+  width: 100%;
+  padding: 10px;
+  border: 1px dashed #2563EB;
+  border-radius: 6px;
+  background: none;
+  color: #2563EB;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.add-more-btn:hover {
+  background: #EFF6FF;
+}

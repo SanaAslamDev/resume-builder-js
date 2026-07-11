@@ -1,40 +1,167 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Resume Builder - Create Your Professional Resume</title>
-  <meta name="description" content="Build a professional resume in minutes with live preview, multiple templates, and one-click PDF export. No sign-up required.">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Resume Builder - Create Your Professional Resume</title>
+    <meta
+      name="description"
+      content="Build a professional resume in minutes with live preview, multiple templates, and one-click PDF export. No sign-up required."
+    />
 
-  <link rel="stylesheet" href="css/styles.css">
-  <link rel="stylesheet" href="css/templates.css">
-  <link rel="stylesheet" href="css/theme.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/templates.css" />
+    <link rel="stylesheet" href="css/theme.css" />
+  </head>
+  <body>
     <header>
-        <div class="header-content">
-            <div class="logo">
-                <span class="icon">
-                    📄
-                </span>
-                <h1>Resume Builder</h1>
-            </div>
-
-            <nav>
-                <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
-                <button id="exportPdfBtn" class="primary" >⬇️ Download PDF</button>
-            </nav>
+      <div class="header-content">
+        <div class="logo">
+          <span class="icon"> 📄 </span>
+          <h1>Resume Builder</h1>
         </div>
+
+        <nav>
+          <button id="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+          <button id="exportPdfBtn" class="primary">⬇️ Download PDF</button>
+        </nav>
+      </div>
     </header>
 
     <main>
-        <aside class="form-panel">
-            <p>form sections will go here</p>
-        </aside>
-        <section class="preview-panel">
-            <p>live resume preview will go here </p>
-        </section>
+      <aside class="form-panel">
+        <div class="form-section">
+          <div class="form-section-header" data-toggle="section">
+            <h2>Personal Informattion</h2>
+            <span class="toggle-icon">▼</span>
+          </div>
+
+          <div class="form-section-body">
+            <div class="form-group">
+              <label for="fullName">Full Name</label>
+              <input type="text" id="fullName" placeholder="John Doe" />
+            </div>
+
+            <div class="form-group">
+              <label for="jobTitle">Job Title</label>
+              <input
+                type="text"
+                id="jobTitle"
+                placeholder="Frontend Developer"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="john@example.com" />
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone</label>
+              <input type="tel" id="phone" placeholder="+1 234 567 8900" />
+            </div>
+            <div class="form-group">
+              <label for="location">Location</label>
+              <input type="text" id="location" placeholder="New York, USA" />
+            </div>
+            <div class="form-group">
+              <label for="summary">Professional Summary</label>
+              <textarea
+                id="summary"
+                rows="4"
+                placeholder="A brief summary about yourself..."
+              ></textarea>
+            </div>
+          </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-header" data-toggle="section">
+              <h2>Education</h2>
+              <span class="toggle-icon">▼</span>
+            </div>
+            <div class="form-section-body">
+              <div class="entry-card" id="education-entry-1">
+                <div class="entry-card-header">
+                  <span class="entry-title">Entry 1</span>
+                  <button class="delete-btn" aria-label="Delete this entry">
+                    🗑️
+                  </button>
+                </div>
+                <div class="form-group">
+                  <label for="edu-school-1">School / University</label>
+                  <input
+                    type="text"
+                    id="edu-school-1"
+                    placeholder="Harvard University"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="edu-degree-1">Degree</label>
+                  <input
+                    type="text"
+                    id="edu-degree-1"
+                    placeholder="Bachelor of Science"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="edu-year-1">Year</label>
+                  <input
+                    type="text"
+                    id="edy-year-1"
+                    placeholder="2020 - 2024"
+                  />
+                </div>
+              </div>
+              <button class="add-more-btn" id="addEducationBtn">
+                + Add More
+              </button>
+            </div>
+          </div>
+        
+          <div class="form-section">
+  <div class="form-section-header" data-toggle="section">
+    <h2>Experience</h2>
+    <span class="toggle-icon">▼</span>
+  </div>
+
+  <div class="form-section-body">
+
+    <div class="entry-card" id="experience-entry-1">
+      <div class="entry-card-header">
+        <span class="entry-title">Entry 1</span>
+        <button class="delete-btn" aria-label="Delete this entry">🗑️</button>
+      </div>
+
+      <div class="form-group">
+        <label for="exp-company-1">Company</label>
+        <input type="text" id="exp-company-1" placeholder="Google">
+      </div>
+
+      <div class="form-group">
+        <label for="exp-role-1">Role</label>
+        <input type="text" id="exp-role-1" placeholder="Senior Developer">
+      </div>
+
+      <div class="form-group">
+        <label for="exp-duration-1">Duration</label>
+        <input type="text" id="exp-duration-1" placeholder="Jan 2022 - Present">
+      </div>
+
+      <div class="form-group">
+        <label for="exp-desc-1">Description</label>
+        <textarea id="exp-desc-1" rows="3" placeholder="What did you do in this role?"></textarea>
+      </div>
+    </div>
+
+    <button class="add-more-btn" id="addExperienceBtn">+ Add More</button>
+
+  </div>
+</div>
+      </aside>
+      <section class="preview-panel">
+        <p>live resume preview will go here</p>
+      </section>
     </main>
-</body>
+
+    <script src="js/ui.js"></script>
+  </body>
 </html>
