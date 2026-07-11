@@ -1,0 +1,107 @@
+/* ===================================
+   RESET - removes browser default styling
+   =================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+  color: #1F2937;
+  background: #FFFFFF;
+}
+
+/* ===================================
+   HEADER
+   =================================== */
+header {
+  background: #FFFFFF;
+  border-bottom: 1px solid #E5E7EB;
+  padding: 16px 24px;
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.logo h1 {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+nav button {
+  padding: 8px 16px;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  background: #FFFFFF;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+nav button.primary {
+  background: #2563EB;
+  color: white;
+  border: none;
+  font-weight: 500;
+}
+
+main{
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    max-width: 1400px;
+    margin: 0 auto;
+    min-height: calc(100vh -65px);
+
+
+}
+.form-panel{
+     background: #F9FAFB;
+     border-right: 1px solid #E5E7EB;
+     padding: 24px;
+
+}
+
+.preview-panel{
+     background: #FFFFFF;
+  padding: 32px;
+}
+
+@media(max-width: 1024){
+    main{
+         grid-template-columns: 1fr;
+    }
+    .form-panel {
+    border-right: none;
+    border-bottom: 1px solid #E5E7EB;
+  }
+
+}
+@media (max-width: 600px) {
+  .header-content {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  nav button {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
