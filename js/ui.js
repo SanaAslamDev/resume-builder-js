@@ -15,17 +15,15 @@ sectionHeaders.forEach(function (header) {
 
 const addEducationBtn = document.getElementById('addEducationBtn');
 const educationBody = addEducationBtn.parentElement;
-
-// Save a clean copy of the FIRST entry as our permanent template
 const educationTemplate = document.getElementById('education-entry-1').cloneNode(true);
 
-addEducationBtn.addEventListener('click', function () {
-  // Count how many entries currently exist on screen right now
+// Creates ONE new education entry. If "data" is passed in, fills it with that data.
+// If no data is passed, creates a blank entry (used by the "+ Add More" button).
+function addEducationEntry(data) {
   const currentEntries = educationBody.querySelectorAll('.entry-card');
   const newNumber = currentEntries.length + 1;
 
   const newEntry = educationTemplate.cloneNode(true);
-
   newEntry.id = 'education-entry-' + newNumber;
   newEntry.querySelector('.entry-title').textContent = 'Entry ' + newNumber;
 
@@ -36,8 +34,24 @@ addEducationBtn.addEventListener('click', function () {
   });
 
   educationBody.insertBefore(newEntry, addEducationBtn);
+
+  // If we were given saved data, fill in the fields
+  if (data) {
+    newEntry.querySelector('input[id^="edu-school-"]').value = data.school || '';
+    newEntry.querySelector('input[id^="edu-degree-"]').value = data.degree || '';
+    newEntry.querySelector('input[id^="edu-year-"]').value = data.year || '';
+  }
+}
+
+addEducationBtn.addEventListener('click', function () {
+  addEducationEntry(); // no data passed = blank entry
 });
 
+educationBody.addEventListener('click', function (event) {
+  if (event.target.classList.contains('delete-btn')) {
+    event.target.closest('.entry-card').remove();
+  }
+});
 // ===================================
 // DELETE any education entry
 // ===================================
