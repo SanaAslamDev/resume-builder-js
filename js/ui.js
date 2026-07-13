@@ -62,7 +62,7 @@ educationBody.addEventListener('click', function (event) {
   }
 });
 
-/// ===================================
+// ===================================
 // ADD MORE / DELETE for Experience entries
 // ===================================
 
@@ -103,16 +103,15 @@ experienceBody.addEventListener('click', function (event) {
     event.target.closest('.entry-card').remove();
   }
 });
-
 // ===================================
-// PROJECTS - same pattern as Experience
+// ADD MORE / DELETE for Project entries
 // ===================================
 
 const addProjectBtn = document.getElementById('addProjectBtn');
 const projectBody = addProjectBtn.parentElement;
 const projectTemplate = document.getElementById('project-entry-1').cloneNode(true);
 
-addProjectBtn.addEventListener('click', function () {
+function addProjectEntry(data) {
   const currentEntries = projectBody.querySelectorAll('.entry-card');
   const newNumber = currentEntries.length + 1;
 
@@ -127,6 +126,16 @@ addProjectBtn.addEventListener('click', function () {
   });
 
   projectBody.insertBefore(newEntry, addProjectBtn);
+
+  if (data) {
+    newEntry.querySelector('input[id^="proj-name-"]').value = data.name || '';
+    newEntry.querySelector('textarea[id^="proj-desc-"]').value = data.description || '';
+    newEntry.querySelector('input[id^="proj-link-"]').value = data.link || '';
+  }
+}
+
+addProjectBtn.addEventListener('click', function () {
+  addProjectEntry();
 });
 
 projectBody.addEventListener('click', function (event) {
@@ -134,6 +143,15 @@ projectBody.addEventListener('click', function (event) {
     event.target.closest('.entry-card').remove();
   }
 });
+
+// Adds ONE tag to a given list - reusable by both typing Enter and loading saved data
+function addTag(listId, text) {
+  const list = document.getElementById(listId);
+  const tag = document.createElement('div');
+  tag.className = 'tag';
+  tag.innerHTML = '<span>' + text + '</span> <button aria-label="Remove">✕</button>';
+  list.appendChild(tag);
+}
 
 // ===================================
 // A REUSABLE function for tag-based sections
@@ -151,11 +169,7 @@ function setupTagInput(inputId, listId) {
       const text = input.value.trim();
       if (text === '') return;
 
-      const tag = document.createElement('div');
-      tag.className = 'tag';
-      tag.innerHTML = '<span>' + text + '</span> <button aria-label="Remove">✕</button>';
-
-      list.appendChild(tag);
+      addTag(listId, text);
       input.value = '';
     }
   });

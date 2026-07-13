@@ -6,10 +6,12 @@ function safeValue(parent, selector) {
   return element ? element.value : '';
 }
 
+// ===================================
+// COLLECT all form data into one object
+// ===================================
 function collectResumeData() {
   const data = {};
 
-  // --- Personal Info ---
   data.fullName = document.getElementById('fullName').value;
   data.jobTitle = document.getElementById('jobTitle').value;
   data.email = document.getElementById('email').value;
@@ -17,10 +19,8 @@ function collectResumeData() {
   data.location = document.getElementById('location').value;
   data.summary = document.getElementById('summary').value;
 
-  // --- Education (multiple entries) ---
   data.education = [];
-  const educationCards = document.querySelectorAll('[id^="education-entry-"]');
-  educationCards.forEach(function (card) {
+  document.querySelectorAll('[id^="education-entry-"]').forEach(function (card) {
     data.education.push({
       school: safeValue(card, 'input[id^="edu-school-"]'),
       degree: safeValue(card, 'input[id^="edu-degree-"]'),
@@ -28,10 +28,8 @@ function collectResumeData() {
     });
   });
 
-  // --- Experience (multiple entries) ---
   data.experience = [];
-  const experienceCards = document.querySelectorAll('[id^="experience-entry-"]');
-  experienceCards.forEach(function (card) {
+  document.querySelectorAll('[id^="experience-entry-"]').forEach(function (card) {
     data.experience.push({
       company: safeValue(card, 'input[id^="exp-company-"]'),
       role: safeValue(card, 'input[id^="exp-role-"]'),
@@ -40,10 +38,8 @@ function collectResumeData() {
     });
   });
 
-  // --- Projects (multiple entries) ---
   data.projects = [];
-  const projectCards = document.querySelectorAll('[id^="project-entry-"]');
-  projectCards.forEach(function (card) {
+  document.querySelectorAll('[id^="project-entry-"]').forEach(function (card) {
     data.projects.push({
       name: safeValue(card, 'input[id^="proj-name-"]'),
       description: safeValue(card, 'textarea[id^="proj-desc-"]'),
@@ -51,7 +47,6 @@ function collectResumeData() {
     });
   });
 
-  // --- Skills, Languages, Certifications (tag-based) ---
   data.skills = collectTags('skillsList');
   data.languages = collectTags('languagesList');
   data.certifications = collectTags('certsList');
@@ -61,23 +56,20 @@ function collectResumeData() {
 
 function collectTags(listId) {
   const tags = [];
-  const tagElements = document.querySelectorAll('#' + listId + ' .tag span');
-  tagElements.forEach(function (span) {
+  document.querySelectorAll('#' + listId + ' .tag span').forEach(function (span) {
     tags.push(span.textContent);
   });
   return tags;
 }
 
-
+// ===================================
+// SAVE resume data to LocalStorage
+// ===================================
 function saveResumeData() {
   const data = collectResumeData();
-  const dataAsText = JSON.stringify(data);
-  localStorage.setItem('resumeData', dataAsText);
+  localStorage.setItem('resumeData', JSON.stringify(data));
 }
 
-// ===================================
-// Wire up the manual Save button
-// ===================================
 const saveBtn = document.getElementById('saveBtn');
 saveBtn.addEventListener('click', function () {
   saveResumeData();
@@ -87,25 +79,59 @@ saveBtn.addEventListener('click', function () {
 // ===================================
 // LOAD resume data from LocalStorage
 // ===================================
-
 function loadResumeData() {
   const savedText = localStorage.getItem('resumeData');
 
-  // If nothing has been saved yet, stop here - nothing to load
   if (!savedText) {
     return;
   }
 
   const data = JSON.parse(savedText);
 
-  // --- Restore Personal Info ---
   document.getElementById('fullName').value = data.fullName || '';
   document.getElementById('jobTitle').value = data.jobTitle || '';
   document.getElementById('email').value = data.email || '';
   document.getElementById('phone').value = data.phone || '';
   document.getElementById('location').value = data.location || '';
   document.getElementById('summary').value = data.summary || '';
+
+  if (data.education && data.education.length > 0) {
+    data.education.forEach(function (entry) {
+      addEducationEntry(entry);
+    });
+  }
+
+  if (data.experience && data.experience.length > 0) {
+    data.experience.forEach(function (entry) {
+      addExperienceEntry(entry);
+    });
+  }
+
+  if (data.projects && data.projects.length > 0) {
+    data.projects.forEach(function (entry) {
+      addProjectEntry(entry);
+    });
+  }
+
+  if (data.skills) {
+    data.skills.forEach(function (skill) {
+      addTag('skillsList', skill);
+    });
+  }
+  if (data.languages) {
+    data.languages.forEach(function (lang) {
+      addTag('languagesList', lang);
+    });
+  }
+  if (data.certifications) {
+    data.certifications.forEach(function (cert) {
+      addTag('certsList', cert);
+    });
+  }
 }
 
-// Run this immediately when the page loads
-loadResumeData();
+// NOTE: loadResumeData() is NOT called here.
+// It's called from the bottom of ui.js instead, AFTER all the
+// addEducationEntry / addExperienceEntry / addProjectEntry / addTag
+// functions have been defined. Calling it here would fail, since
+// this file loads before ui.js.
