@@ -62,21 +62,19 @@ educationBody.addEventListener('click', function (event) {
   }
 });
 
-// ===================================
+/// ===================================
 // ADD MORE / DELETE for Experience entries
 // ===================================
 
 const addExperienceBtn = document.getElementById('addExperienceBtn');
 const experienceBody = addExperienceBtn.parentElement;
-
 const experienceTemplate = document.getElementById('experience-entry-1').cloneNode(true);
 
-addExperienceBtn.addEventListener('click', function () {
+function addExperienceEntry(data) {
   const currentEntries = experienceBody.querySelectorAll('.entry-card');
   const newNumber = currentEntries.length + 1;
 
   const newEntry = experienceTemplate.cloneNode(true);
-
   newEntry.id = 'experience-entry-' + newNumber;
   newEntry.querySelector('.entry-title').textContent = 'Entry ' + newNumber;
 
@@ -87,12 +85,22 @@ addExperienceBtn.addEventListener('click', function () {
   });
 
   experienceBody.insertBefore(newEntry, addExperienceBtn);
+
+  if (data) {
+    newEntry.querySelector('input[id^="exp-company-"]').value = data.company || '';
+    newEntry.querySelector('input[id^="exp-role-"]').value = data.role || '';
+    newEntry.querySelector('input[id^="exp-duration-"]').value = data.duration || '';
+    newEntry.querySelector('textarea[id^="exp-desc-"]').value = data.description || '';
+  }
+}
+
+addExperienceBtn.addEventListener('click', function () {
+  addExperienceEntry();
 });
 
 experienceBody.addEventListener('click', function (event) {
   if (event.target.classList.contains('delete-btn')) {
-    const entryToDelete = event.target.closest('.entry-card');
-    entryToDelete.remove();
+    event.target.closest('.entry-card').remove();
   }
 });
 
