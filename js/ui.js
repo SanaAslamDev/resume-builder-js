@@ -35,7 +35,6 @@ function addEducationEntry(data) {
 
   educationBody.insertBefore(newEntry, addEducationBtn);
 
-  // If we were given saved data, fill in the fields
   if (data) {
     newEntry.querySelector('input[id^="edu-school-"]').value = data.school || '';
     newEntry.querySelector('input[id^="edu-degree-"]').value = data.degree || '';
@@ -44,21 +43,15 @@ function addEducationEntry(data) {
 }
 
 addEducationBtn.addEventListener('click', function () {
-  addEducationEntry(); // no data passed = blank entry
+  addEducationEntry();
 });
 
-educationBody.addEventListener('click', function (event) {
-  if (event.target.classList.contains('delete-btn')) {
-    event.target.closest('.entry-card').remove();
-  }
-});
 // ===================================
 // DELETE any education entry
 // ===================================
 educationBody.addEventListener('click', function (event) {
   if (event.target.classList.contains('delete-btn')) {
-    const entryToDelete = event.target.closest('.entry-card');
-    entryToDelete.remove();
+    event.target.closest('.entry-card').remove();
   }
 });
 
@@ -103,6 +96,7 @@ experienceBody.addEventListener('click', function (event) {
     event.target.closest('.entry-card').remove();
   }
 });
+
 // ===================================
 // ADD MORE / DELETE for Project entries
 // ===================================
@@ -185,3 +179,39 @@ function setupTagInput(inputId, listId) {
 setupTagInput('skillInput', 'skillsList');
 setupTagInput('languageInput', 'languagesList');
 setupTagInput('certInput', 'certsList');
+
+// ===================================
+// DARK MODE TOGGLE
+// ===================================
+
+const themeToggleBtn = document.getElementById('theme-toggle');
+
+function applyTheme(isDark) {
+  if (isDark) {
+    document.body.classList.add('dark-mode');
+    themeToggleBtn.textContent = '☀️';
+  } else {
+    document.body.classList.remove('dark-mode');
+    themeToggleBtn.textContent = '🌙';
+  }
+}
+
+themeToggleBtn.addEventListener('click', function () {
+  const isDarkNow = document.body.classList.contains('dark-mode');
+  const newIsDark = !isDarkNow;
+
+  applyTheme(newIsDark);
+  localStorage.setItem('theme', newIsDark ? 'dark' : 'light');
+});
+
+// --- On page load, restore saved theme preference ---
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme === 'dark') {
+  applyTheme(true);
+}
+
+// ===================================
+// Everything above this point must run first (all our add-entry functions
+// and tag setup need to exist before we try to load saved data)
+// ===================================
+loadResumeData();

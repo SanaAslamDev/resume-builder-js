@@ -1,0 +1,61 @@
+/* ===================================
+   DARK MODE - applies when <body> has class "dark-mode"
+   =================================== */
+
+body.dark-mode {
+  background: #111827;
+  color: #E5E7EB;
+}
+
+/* --- Header --- */
+body.dark-mode header {
+  background: #1F2937;
+  border-bottom-color: #374151;
+}
+
+body.dark-mode nav button {
+  background: #1F2937;
+  border-color: #374151;
+  color: #E5E7EB;
+}
+
+/* --- Form panel --- */
+body.dark-mode .form-panel {
+  background: #111827;
+  border-right-color: #374151;
+}
+
+body.dark-mode .form-section {
+  background: #1F2937;
+  border-color: #374151;
+}
+
+body.dark-mode .form-section-header {
+  border-bottom-color: #374151;
+}
+
+body.dark-mode .form-group label {
+  color: #D1D5DB;
+}
+
+body.dark-mode .form-group input,
+body.dark-mode .form-group textarea {
+  background: #111827;
+  border-color: #374151;
+  color: #E5E7EB;
+}
+
+/* --- Entry cards --- */
+body.dark-mode .entry-card {
+  background: #111827;
+  border-color: #374151;
+}
+
+body.dark-mode .entry-title {
+  color: #9CA3AF;
+}
+
+/* --- Preview panel (keep the resume paper white, like real paper) --- */
+body.dark-mode .preview-panel {
+  background: #111827;
+}
